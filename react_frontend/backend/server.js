@@ -40,7 +40,7 @@ connection.once('open', () => {
 
 
 /*
-//寫法二，這感覺比較好。連線成功會print connected...,失敗會catch error
+//(1)寫法二，較好較簡潔。連線成功會print connected...,失敗會catch error
 mongoose.connect(process.env.ATLAS_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -51,18 +51,21 @@ mongoose.connect(process.env.ATLAS_URI, {
 .catch(err => console.log(err))
 */
 
-
-
-
-
-
-/*
+//The first two lines load the routers from other files. 
+//Then the routers are added as middleware.
+//So the server can be used to perform CRUD operations.
+//這兩個檔案是我們自創，作為the API endpoint routes
+//語法：require the file and then use the file~
 const exercisesRouter = require('./routes/exercises');
 const usersRouter = require('./routes/users');
 
+//whenever someone goes to our root URL
+//The server URL is https://localhost:5000. Now if you add “/exercises” or “/users” (自訂的～)
+//on the end it will load the endpoints defined in the corresponding router files.
+//URL在此設定～若別人輸入https://localhost:5000/user 會失敗～因為是users
 app.use('/exercises', exercisesRouter);
 app.use('/users', usersRouter);
-*/
+
 
 
 //server starts to listen on a certain port
