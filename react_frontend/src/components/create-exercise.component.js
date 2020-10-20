@@ -1,8 +1,9 @@
 // this component will allow us to add exercises to the DB
 
 import React, { Component } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import DatePicker from 'react-datepicker';
+// the styling for DatePicker
 import "react-datepicker/dist/react-datepicker.css";
 
 export default class CreateExercise extends Component {
@@ -45,6 +46,18 @@ export default class CreateExercise extends Component {
   }
 
   componentDidMount() {
+    this.setState({ 
+      users: ['test user'],
+      username: 'test user'
+    });
+  }
+
+  /*
+  // it's a react lifecycle method that react will automatically call at different point
+  // componentDidMount will automatically be called right before anything display on the page
+  // i.e. when the create exercise component is about to load the page, 會先執行此code
+  // p.s. 原本username會有下拉選單(從DB抓資料)給user選，但這裡好像要先hard-code a single user
+  componentDidMount() {
     axios.get('http://localhost:5000/users/')
       .then(response => {
         if (response.data.length > 0) {
@@ -59,6 +72,8 @@ export default class CreateExercise extends Component {
       })
 
   }
+  */
+  
 
   //we need to add methods which can be used to update the state properties 
   onChangeUsername(e) {
@@ -112,8 +127,10 @@ export default class CreateExercise extends Component {
 
     console.log(exercise);
 
+    /*
     axios.post('http://localhost:5000/exercises/add', exercise)
       .then(res => console.log(res.data));
+      */
 
     // take the person back to our home page which is going to be the list of exercises
     window.location = '/';
@@ -121,6 +138,7 @@ export default class CreateExercise extends Component {
 
   render() {
     return (
+    // pretty standard HTML form code
     <div>
       <h3>Create New Exercise Log</h3>
       <form onSubmit={this.onSubmit}>
@@ -132,6 +150,13 @@ export default class CreateExercise extends Component {
               value={this.state.username}
               onChange={this.onChangeUsername}>
               {
+                // we can put javascript in the curly bracses
+                // this.state.users is an array of all the users which come from our MongoDB
+                // .map allows us to return something for each element in an array
+                // for each 'user', it will return an 'option', which is an option of the select box
+                // The DatePicker component is going to pop out a calendar (by installing a package)
+                // p.s. map(), ()內的could be an arrow function if we want to refactor, now it's 
+                // just a regular function
                 this.state.users.map(function(user) {
                   return <option 
                     key={user}
