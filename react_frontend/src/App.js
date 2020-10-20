@@ -14,6 +14,13 @@ we want to be used with the router inside a router element: <Router> </Router>
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// because we implement these components in saperated file
+import Navbar from "./components/navbar.component"
+import ExercisesList from "./components/exercises-list.component";
+import EditExercise from "./components/edit-exercise.component";
+import CreateExercise from "./components/create-exercise.component";
+import CreateUser from "./components/create-user.component";
+
 
 function App() {
   return (
@@ -25,6 +32,7 @@ function App() {
     // 5. the path attribute is set to the URL path
     // e.g. if you go to the root URL with / at the end (i.e. http://localhost:5000/)
     // it will load the ExercisesList component
+    // 6. 可以吧<div className="container">和</div>刪掉，依樣可正常運作，但畫面會沒有space on the side
     <Router>
       <div className="container">
         <Navbar />
