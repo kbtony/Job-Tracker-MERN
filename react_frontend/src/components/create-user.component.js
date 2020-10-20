@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -28,10 +28,12 @@ export default class CreateUser extends Component {
 
     console.log(user);
 
-    /*
+    // send the HTTP post request to this backend endpoint(http://localhost:5000/users/add)
+    // This endpoint is expecting a JSON object in the request body so we passed in 
+    // the newUser object as a second argument.
     axios.post('http://localhost:5000/users/add', user)
+      // this is going to be a promise, so after it's posted, we're gonna do something
       .then(res => console.log(res.data));
-      */
 
     // keep the user on this page(create-user) after submit 
     // so they can create multiple users at a time

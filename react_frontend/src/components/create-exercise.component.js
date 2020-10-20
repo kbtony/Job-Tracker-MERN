@@ -1,7 +1,7 @@
 // this component will allow us to add exercises to the DB
 
 import React, { Component } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 import DatePicker from 'react-datepicker';
 // the styling for DatePicker
 import "react-datepicker/dist/react-datepicker.css";
@@ -45,24 +45,31 @@ export default class CreateExercise extends Component {
     }
   }
 
+  /*
+  // initial version, for testing, 先hard-code a single user
   componentDidMount() {
     this.setState({ 
       users: ['test user'],
       username: 'test user'
     });
   }
+  */
 
-  /*
   // it's a react lifecycle method that react will automatically call at different point
   // componentDidMount will automatically be called right before anything display on the page
   // i.e. when the create exercise component is about to load the page, 會先執行此code
-  // p.s. 原本username會有下拉選單(從DB抓資料)給user選，但這裡好像要先hard-code a single user
+  // p.s. username會有下拉選單(從DB抓資料)給user選
   componentDidMount() {
     axios.get('http://localhost:5000/users/')
       .then(response => {
+        // check if there is at least one user in the DB
         if (response.data.length > 0) {
           this.setState({
+            // data is going to be an array and we're going to map the array which will allow
+            // us to return something (user.username) for every element (user) in the array
+            // p.s. 在MongoDB, user還有很多其他資料(e.g. id, createdAt, updatedAt)
             users: response.data.map(user => user.username),
+            // so username is automatically set to the first user in the DB
             username: response.data[0].username
           })
         }
@@ -72,7 +79,6 @@ export default class CreateExercise extends Component {
       })
 
   }
-  */
   
 
   //we need to add methods which can be used to update the state properties 
@@ -127,10 +133,11 @@ export default class CreateExercise extends Component {
 
     console.log(exercise);
 
-    /*
+    // Connecting Front to Back by causing our frontend to send HTTP request 
+    // to the server endpoints on the backend
     axios.post('http://localhost:5000/exercises/add', exercise)
+      // log the result to the console (這樣在chome的console就可以看到log)
       .then(res => console.log(res.data));
-      */
 
     // take the person back to our home page which is going to be the list of exercises
     window.location = '/';
