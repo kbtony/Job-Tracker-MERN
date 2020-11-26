@@ -7,9 +7,19 @@ export default class CreateUser extends Component {
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    //1126
+    this.onChangeLocation = this.onChangeLocation.bind(this);
+    this.onChangeContact1 = this.onChangeContact1.bind(this);
+    this.onChangeContact2 = this.onChangeContact2.bind(this);
+
 
     this.state = {
-      username: ''
+      username: '',
+      //1126
+      location: '',
+      contact1: '',
+      contact2: ''
+
     }
   }
 
@@ -19,11 +29,34 @@ export default class CreateUser extends Component {
     })
   }
 
+  //1126
+  onChangeLocation(e) {
+    this.setState({
+      location: e.target.value
+    })
+  }
+
+  onChangeContact1(e) {
+    this.setState({
+      contact1: e.target.value
+    })
+  }
+
+  onChangeContact2(e) {
+    this.setState({
+      contact2: e.target.value
+    })
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
     const user = {
-      username: this.state.username
+      username: this.state.username,
+      //1126
+      location: this.state.location,
+      contact1: this.state.contact1,
+      contact2: this.state.contact2
     }
 
     console.log(user);
@@ -38,7 +71,11 @@ export default class CreateUser extends Component {
     // keep the user on this page(create-user) after submit 
     // so they can create multiple users at a time
     this.setState({
-      username: ''
+      username: '',
+      //1126
+      location: '',
+      contact1: '',
+      contact2: ''
     })
   }
 
@@ -46,10 +83,10 @@ export default class CreateUser extends Component {
     return (
       // what we gonna render here is a very simple web form that has one field
       <div>
-        <h3>Create New User</h3>
+        <h3>Create New Company</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
-            <label>Username: </label>
+            <label>Company </label>
             <input  type="text"
                 required
                 className="form-control"
@@ -58,7 +95,32 @@ export default class CreateUser extends Component {
                 />
           </div>
           <div className="form-group">
-            <input type="submit" value="Create User" className="btn btn-primary" />
+            <label>Location</label> 
+            <input  type="text"
+                required
+                className="form-control"
+                value={this.state.location}
+                onChange={this.onChangeLocation}
+                />
+          </div>
+          <div className="form-group">
+            <label>Contact1</label> 
+            <input  type="text"
+                className="form-control"
+                value={this.state.contact1}
+                onChange={this.onChangeContact1}
+                />
+          </div>
+          <div className="form-group">
+            <label>Contact2</label> 
+            <input  type="text"
+                className="form-control"
+                value={this.state.contact2}
+                onChange={this.onChangeContact2}
+                />
+          </div>
+          <div className="form-group">
+            <input type="submit" value="Create Company" className="btn btn-primary" />
           </div>
         </form>
       </div>

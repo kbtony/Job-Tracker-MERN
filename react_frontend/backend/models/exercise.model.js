@@ -14,9 +14,9 @@ const exerciseSchema = new Schema({
   // has been generated. we can set a default key to make sure something is saved
   date: { type: Date, required: true },
 }, {
+  // 注意！timestamps要和上面的entry分開放在不同大括號內
   timestamps: true,
 });
 
 const Exercise = mongoose.model('Exercise', exerciseSchema);
-
 module.exports = Exercise;

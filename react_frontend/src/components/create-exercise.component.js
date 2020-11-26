@@ -147,10 +147,10 @@ export default class CreateExercise extends Component {
     return (
     // pretty standard HTML form code
     <div>
-      <h3>Create New Exercise Log</h3>
+      <h3>Create New Job Log</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
-          <label>Username: </label>
+          <label>Company </label>
           <select ref="userInput"
               required
               className="form-control"
@@ -174,7 +174,7 @@ export default class CreateExercise extends Component {
           </select>
         </div>
         <div className="form-group"> 
-          <label>Description: </label>
+          <label>Description </label>
           <input  type="text"
               required
               className="form-control"
@@ -183,7 +183,7 @@ export default class CreateExercise extends Component {
               />
         </div>
         <div className="form-group">
-          <label>Duration (in minutes): </label>
+          <label>Duration (in minutes) </label>
           <input 
               type="text" 
               className="form-control"
@@ -192,7 +192,7 @@ export default class CreateExercise extends Component {
               />
         </div>
         <div className="form-group">
-          <label>Date: </label>
+          <label>Date </label>
           <div>
             <DatePicker
               selected={this.state.date}

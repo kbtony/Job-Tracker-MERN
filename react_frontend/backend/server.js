@@ -9,8 +9,9 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // this is how we going to create the Express server
-// make the server listen on port 5000
 const app = express();
+// make the server listen on whatever is in the environment variable PORT, 
+// or 5000 if there's nothing there
 const port = process.env.PORT || 5000;
 
 // middleware
@@ -32,6 +33,7 @@ const uri = process.env.ATLAS_URI;
 // some of the update to MongoDB
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true,}
 );
+// 此寫法可見官網 https://mongoosejs.com/docs/index.html
 const connection = mongoose.connection;
 // once the connection is open, it's going to log "establish successfully"
 connection.once('open', () => {
@@ -56,6 +58,7 @@ mongoose.connect(process.env.ATLAS_URI, {
 // So the server can be used to perform CRUD operations.
 // 這兩個檔案是我們自創，作為the API endpoint routes
 // 語法：require the file and then use the file~
+// variable name: exercisesRouter, usersRouter 自訂的
 const exercisesRouter = require('./routes/exercises');
 const usersRouter = require('./routes/users');
 

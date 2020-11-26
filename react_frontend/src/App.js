@@ -14,6 +14,14 @@ we want to be used with the router inside a router element: <Router> </Router>
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// 11/25 for react bootstrap navbar collapse hamburger button -> navbar-toggler in navbar.componment.js
+// https://stackoverflow.com/questions/61177287/react-bootstrap-navbar-collapse-hamburger-button-does-not-show-nav-items
+// 只安裝了jQuery, 測試後下面這兩個import好像用不到
+//import $ from 'jquery';
+//import Popper from 'popper.js';
+import "bootstrap/dist/js/bootstrap.bundle.min";
+
+
 // because we implement these components in saperated file
 import Navbar from "./components/navbar.component"
 import ExercisesList from "./components/exercises-list.component";
