@@ -17,9 +17,11 @@ import axios from 'axios';
 // the v=best practice here (指a href="#"...?!?!?) is to use a button style it as a link
 const Exercise = props => (
   <tr>
-    <td>{props.exercise.username}</td>
+    <td>{props.exercise.company}</td>
+    <td>{props.exercise.jobTitle}</td>
     <td>{props.exercise.description}</td>
     <td>{props.exercise.duration}</td>
+    <td>{props.exercise.status}</td>
     <td>{props.exercise.date.substring(0,10)}</td>
     <td>
       <Link to={"/edit/"+props.exercise._id}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
@@ -84,9 +86,11 @@ export default class ExercisesList extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>Username</th>
+              <th>Company</th>
+              <th>Job Title</th>
               <th>Description</th>
               <th>Duration</th>
+              <th>Status</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>

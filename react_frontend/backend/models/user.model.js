@@ -44,7 +44,7 @@ const userSchema = new Schema({
     type: String,
     required: false,
     trim: true
-  }
+  },
 }, {
   // include timestamps to automatically create fields for when it was created/modified
   timestamps: true,

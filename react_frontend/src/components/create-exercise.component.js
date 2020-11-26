@@ -16,10 +16,12 @@ export default class CreateExercise extends Component {
     super(props);
 
     // we want 'this' to refer to the whole class, bind every methods
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeCompany = this.onChangeCompany.bind(this);
+    this.onChangeJobTitle = this.onChangeJobTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangeStatus = this.onChangeStatus.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     /*
@@ -34,14 +36,16 @@ export default class CreateExercise extends Component {
     */
     this.state = {
       // these are all the parts of the database
-      username: '', // '' is called empty string
+      company: '', // '' is called empty string
+      jobTitle: '',
       description: '',
       duration: 0,
+      status: '',
       date: new Date(),
-      // we are going to something right just for this component called 'users'
-      // because there is a drop down menu that you can select all the users that
+      // we are going to something right just for this component called 'companies'
+      // because there is a drop down menu that you can select all the companies that
       // are already in the DB
-      users: []
+      companies: []
     }
   }
 
@@ -49,8 +53,8 @@ export default class CreateExercise extends Component {
   // initial version, for testing, 先hard-code a single user
   componentDidMount() {
     this.setState({ 
-      users: ['test user'],
-      username: 'test user'
+      companies: ['test user'],
+      company: 'test user'
     });
   }
   */
@@ -66,11 +70,12 @@ export default class CreateExercise extends Component {
         if (response.data.length > 0) {
           this.setState({
             // data is going to be an array and we're going to map the array which will allow
-            // us to return something (user.username) for every element (user) in the array
+            // us to return something (user.company) for every element (user) in the array
             // p.s. 在MongoDB, user還有很多其他資料(e.g. id, createdAt, updatedAt)
-            users: response.data.map(user => user.username),
-            // so username is automatically set to the first user in the DB
-            username: response.data[0].username
+            // 11/26 小心！！！ 這裏的username是user.model.js中定義的，之後應該要改成company!!!
+            companies: response.data.map(user => user.username),
+            // so company is automatically set to the first user in the DB
+            company: response.data[0].username
           })
         }
       })
@@ -82,15 +87,22 @@ export default class CreateExercise extends Component {
   
 
   //we need to add methods which can be used to update the state properties 
-  onChangeUsername(e) {
-    // never do this.state.username = "Tom"
+  onChangeCompany(e) {
+    // never do this.state.company = "Tom"
     // always use the setState method 
     this.setState({
       // set just the item we want to change
-      // there's going to be a textbox for user to enter the username, whenever 
-      // enter, it's going to call the onChangeUsername method
+      // there's going to be a textbox for user to enter the company, whenever 
+      // enter, it's going to call the onChangeCompany method
       // the target is the textbox, the value is the value of the textbox
-      username: e.target.value
+      company: e.target.value
+    })
+  }
+
+  //1126
+  onChangeJobTitle(e) {
+    this.setState({
+      jobTitle: e.target.value
     })
   }
 
@@ -114,6 +126,13 @@ export default class CreateExercise extends Component {
     })
   }
 
+  //1126
+  onChangeStatus(e) {
+    this.setState({
+      status: e.target.value
+    })
+  }
+
   // After those methods, we’ll add one to handle the submit event of the form
   // when click on the submit button, it will call this method
   onSubmit(e) {
@@ -125,10 +144,13 @@ export default class CreateExercise extends Component {
     // you never just create variables normally in react, well, that's inside a 
     // single method you can create variables if they'll be used only within that method
     const exercise = {
-      username: this.state.username,
+      company: this.state.company,
+      jobTitle: this.state.jobTitle,
       description: this.state.description,
       duration: this.state.duration,
+      status: this.state.status,
       date: this.state.date
+      
     }
 
     console.log(exercise);
@@ -151,20 +173,21 @@ export default class CreateExercise extends Component {
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Company </label>
+          <label style={{color:'red'}}>＊ </label>
           <select ref="userInput"
               required
               className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}>
+              value={this.state.company}
+              onChange={this.onChangeCompany}>
               {
                 // we can put javascript in the curly bracses
-                // this.state.users is an array of all the users which come from our MongoDB
+                // this.state.companies is an array of all the companies which come from our MongoDB
                 // .map allows us to return something for each element in an array
                 // for each 'user', it will return an 'option', which is an option of the select box
                 // The DatePicker component is going to pop out a calendar (by installing a package)
                 // p.s. map(), ()內的could be an arrow function if we want to refactor, now it's 
                 // just a regular function
-                this.state.users.map(function(user) {
+                this.state.companies.map(function(user) {
                   return <option 
                     key={user}
                     value={user}>{user}
@@ -174,7 +197,18 @@ export default class CreateExercise extends Component {
           </select>
         </div>
         <div className="form-group"> 
+          <label>Job Title </label>
+          <label style={{color:'red'}}>＊ </label>
+          <input  type="text"
+              required
+              className="form-control"
+              value={this.state.jobTitle}
+              onChange={this.onChangeJobTitle}
+              />
+        </div>
+        <div className="form-group"> 
           <label>Description </label>
+          <label style={{color:'red'}}>＊ </label>
           <input  type="text"
               required
               className="form-control"
@@ -191,8 +225,17 @@ export default class CreateExercise extends Component {
               onChange={this.onChangeDuration}
               />
         </div>
+        <div className="form-group"> 
+          <label>Status </label>
+          <input  type="text"
+              className="form-control"
+              value={this.state.status}
+              onChange={this.onChangeStatus}
+              />
+        </div>
         <div className="form-group">
           <label>Date </label>
+          <label style={{color:'red'}}>＊ </label>
           <div>
             <DatePicker
               selected={this.state.date}

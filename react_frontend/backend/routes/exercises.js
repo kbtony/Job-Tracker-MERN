@@ -11,17 +11,22 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
   // assign information from req.body to sever variables
-  const username = req.body.username;
+
+  const company = req.body.company;
+  const jobTitle = req.body.jobTitle;
   const description = req.body.description;
   const duration = Number(req.body.duration);
   // converting date to a Date data type
   const date = Date.parse(req.body.date);
+  const status = req.body.status;
 
   const newExercise = new Exercise({
-    username,
+    company,
+    jobTitle,
     description,
     duration,
     date,
+    status,
   });
 
   newExercise.save()
@@ -53,14 +58,16 @@ router.route('/update/:id').post((req, res) => {
   Exercise.findById(req.params.id)
     .then(exercise => {
       // update the information from the JSON object we receive
-      // e.g. set the old username (exercise.username) to the new username
+      // e.g. set the old company (exercise.company) to the new company
       // p.s. the post request cannot send just the field we want to update
       // need to send all the fields or there will be an error
       // 改進 -> 可修改code使 can receive one of the item instead of all of them 
-      exercise.username = req.body.username;
+      exercise.company = req.body.company;
+      exercise.jobTitle = req.body.jobTitle;
       exercise.description = req.body.description;
       exercise.duration = Number(req.body.duration);
       exercise.date = Date.parse(req.body.date);
+      exercise.status = req.body.status;
 
       exercise.save()
         .then(() => res.json('Exercise updated!'))
