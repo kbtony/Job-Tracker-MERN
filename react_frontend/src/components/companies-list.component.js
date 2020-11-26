@@ -19,7 +19,6 @@ const Company = props => (
 )
 
 
-
 // This is implemented as a class component
 export default class CompaniesList extends Component {
   constructor(props) {
