@@ -28,6 +28,7 @@ import ExercisesList from "./components/exercises-list.component";
 import EditExercise from "./components/edit-exercise.component";
 import CreateExercise from "./components/create-exercise.component";
 import CreateUser from "./components/create-user.component";
+import CompaniesList from './components/companies-list.component';
 
 
 function App() {
@@ -41,11 +42,14 @@ function App() {
     // e.g. if you go to the root URL with / at the end (i.e. http://localhost:5000/)
     // it will load the ExercisesList component
     // 6. 可以吧<div className="container">和</div>刪掉，依樣可正常運作，但畫面會沒有space on the side
+    // 7. 'exact'的作用在此 https://stackoverflow.com/questions/49162311/react-difference-between-route-exact-path-and-route-path
+    // 8. 但不知為何要放在component 前而不是exact path="/"
     <Router>
       <div className="container">
         <Navbar />
         <br/>
         <Route path="/" exact component={ExercisesList} />
+        <Route path="/company" component={CompaniesList} />
         <Route path="/edit/:id" component={EditExercise} />
         <Route path="/create" component={CreateExercise} />
         <Route path="/user" component={CreateUser} />

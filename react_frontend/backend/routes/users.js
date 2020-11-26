@@ -59,5 +59,12 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// 1126 delete company
+router.route('/:id').delete((req, res) => {
+  User.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Company deleted.'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // standard thing for module file (i.e. module file都會這樣寫～)
 module.exports = router;

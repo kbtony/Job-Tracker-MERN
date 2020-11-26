@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+//1126 font
+
+
+
+
+
 export default class CreateUser extends Component {
   constructor(props) {
     super(props);
@@ -82,11 +88,13 @@ export default class CreateUser extends Component {
   render() {
     return (
       // what we gonna render here is a very simple web form that has one field
+      // 可在input裡加上 placeholder="e.g. Google"
       <div>
         <h3>Create New Company</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
             <label>Company </label>
+            <label style={{color:'red'}}>＊ </label>
             <input  type="text"
                 required
                 className="form-control"
@@ -96,6 +104,7 @@ export default class CreateUser extends Component {
           </div>
           <div className="form-group">
             <label>Location</label> 
+            <label style={{color:'red'}}>＊ </label>
             <input  type="text"
                 required
                 className="form-control"
@@ -120,7 +129,7 @@ export default class CreateUser extends Component {
                 />
           </div>
           <div className="form-group">
-            <input type="submit" value="Create Company" className="btn btn-primary" />
+            <input type="submit" value="Create Company" className="btn btn-outline-primary btn-sm" />
           </div>
         </form>
       </div>

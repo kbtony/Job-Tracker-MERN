@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*1126 font of label*/
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
+label {
+  font-Weight: bold;
+  font-size: large;
+  color: DarkSlateBlue;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
