@@ -21,6 +21,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //import Popper from 'popper.js';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
+// 1127 這行註掉就有原本的style
+import './App.css';
+
 
 // because we implement these components in saperated file
 import Navbar from "./components/navbar.component"

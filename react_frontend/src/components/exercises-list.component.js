@@ -26,7 +26,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 // the v=best practice here (指a href="#"...?!?!?) is to use a button style it as a link
 const Exercise = props => (
   <tr>
-    <td>{props.exercise.company}</td>
+    <td style={{color: "white"}}>{props.exercise.company}</td>
     <td>{props.exercise.jobTitle}</td>
     <td>{props.exercise.description}</td>
     <td>{props.exercise.duration}</td>
@@ -34,13 +34,13 @@ const Exercise = props => (
     <td>{props.exercise.date.substring(0,10)}</td>
     <td>
       <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-        <div className="btn-group mr-3" role="group">
-          <Link to={"/edit1/"+props.exercise._id}>
+        <div className="btn-group mr-3" id="tableButton" role="group" >
+          <Link to={"/edit1/"+props.exercise._id} >
             <FontAwesomeIcon icon={faPencilAlt} />
           </Link>
         </div>
-        <div className="btn-group" role="group">
-          <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>
+        <div className="btn-group" id="tableButton" role="group">
+          <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }} style={{color:'red'}}>
             <FontAwesomeIcon icon={faTrashAlt} />
           </a>
         </div>
@@ -101,10 +101,12 @@ export default class ExercisesList extends Component {
   render() {
     return (
       // the body will call the exerciseList() method
+      // 1127 原本是用bootstrap <thead className="thead-light">
+      // 現在改自己寫在App.css裡
       <div>
         <h3>Logged Jobs</h3>
         <table className="table">
-          <thead className="thead-light">
+          <thead>
             <tr>
               <th>Company</th>
               <th>Job Title</th>

@@ -246,7 +246,6 @@ export default class CreateExercise extends Component {
             />
           </div>
         </div>
-
         <div className="form-group">
           <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div className="input-group mr-2">

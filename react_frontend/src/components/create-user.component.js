@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+//1126 cancel button
+import { Link } from 'react-router-dom';
+
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -87,25 +90,27 @@ export default class CreateUser extends Component {
       <div>
         <h3>Create New Company</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group"> 
-            <label>Company </label>
-            <label style={{color:'red'}}>＊ </label>
-            <input  type="text"
+          <div class="form-row">
+            <div className="form-group col-md-6"> 
+              <label>Company </label>
+              <label style={{color:'red'}}>＊ </label>
+              <input  type="text"
                 required
                 className="form-control"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
                 />
-          </div>
-          <div className="form-group">
-            <label>Location</label> 
-            <label style={{color:'red'}}>＊ </label>
-            <input  type="text"
+            </div>
+            <div className="form-group col-md-6">
+              <label>Location</label> 
+              <label style={{color:'red'}}>＊ </label>
+              <input  type="text"
                 required
                 className="form-control"
                 value={this.state.location}
                 onChange={this.onChangeLocation}
                 />
+            </div>
           </div>
           <div className="form-group">
             <label>Contact1</label> 
@@ -124,7 +129,16 @@ export default class CreateUser extends Component {
                 />
           </div>
           <div className="form-group">
-            <input type="submit" value="Create Company" className="btn btn-outline-primary btn-sm" />
+            <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div className="input-group mr-2">
+                <input type="submit" value="Create Company" className="btn btn-primary" /> 
+              </div>
+              <div className="btn-group" role="group">
+                <Link to="/company">
+                  <input type="button" value="Cancel" className="btn btn-danger" />
+                </Link>
+              </div>
+            </div>
           </div>
         </form>
       </div>

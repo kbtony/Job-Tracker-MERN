@@ -17,6 +17,10 @@ code {
 label {
   font-Weight: bold;
   font-size: large;
-  color: DarkSlateBlue;
+  color: rgb(138, 129, 194);
   font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+td {
+  color: "white"
 }

@@ -37,3 +37,76 @@
   }
 }
 
+/*
+  1127 下面都是
+  freecodecamp:
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  實心背景可用：background-color: #6e6e74;
+  漸層背景可用：background: linear-gradient(to left,  #4f4f53, #6e6e74);
+*/
+body {
+  
+  background: linear-gradient(to left,  #4f4f53, #6e6e74);
+  font-family: Yanone Kaffeesatz, sans-serif;
+  font-size: 1.2rem;
+  color:white;
+  align-items: center;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --spacer: 2rem;
+}
+
+html {
+  font-size: 18px;
+}
+
+.container{
+  margin-top: 20px;
+  background-color: #202027;
+  min-height: 90vh;
+  width: 95vw;
+  max-width: 1400px;
+  padding: var(--spacer);
+  border-radius: 20px;
+  display: flex-box;
+  justify-content: center;
+  align-items: center;
+
+}
+
+thead {
+  background-color: rgb(241, 235, 235);
+  color: #414242;
+}
+td {
+  color: #e7e3e3
+}
+
+/*
+  CSS ID Selectors: #id -> Selects the element with id=id
+  如果這裡用.btn-group的話則所有的btn-group都會被套用(但只有想套exercise/company-list的edit | delete button)
+*/
+#tableButton {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding: 0.2rem;
+  font-size: 1rem;
+  height: 1.7rem;
+  /*以下不知何用*/
+  background: 0;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+#tableButton:hover {
+  background-color:#e7e3e3;
+  transition: all 0.2s ease;
+}

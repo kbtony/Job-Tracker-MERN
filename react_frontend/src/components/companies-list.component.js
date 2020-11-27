@@ -4,8 +4,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+// 1127 fontawsome icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+
+
 // 因為下面companyList()中return <Company company=...., 所以這裡是props.company......
-// 1126 未完成！！少一個 edit-company.component.js!!!!
 const Company = props => (
   <tr>
     <td>{props.company.username}</td>
@@ -13,7 +18,18 @@ const Company = props => (
     <td>{props.company.contact1}</td>
     <td>{props.company.contact2}</td>
     <td>
-      <Link to={"/edit2/"+props.company._id}>edit</Link> | <a href="#" onClick={() => { props.deleteCompany(props.company._id) }}>delete</a>
+      <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div className="btn-group mr-3" id="tableButton" role="group">
+          <Link to={"/edit2/"+props.company._id}>
+            <FontAwesomeIcon icon={faPencilAlt} />
+          </Link>
+        </div>
+        <div className="btn-group" id="tableButton" role="group">
+          <a href="#" onClick={() => { props.deleteCompany(props.company._id) }} style={{color:'red'}}>
+            <FontAwesomeIcon icon={faTrashAlt} />
+          </a>
+        </div>
+      </div>
     </td>
   </tr>
 )
@@ -71,12 +87,14 @@ export default class CompaniesList extends Component {
   render() {
     return (
       // the body will call the companyList() method
+      // 1127 原本是用bootstrap <thead className="thead-light">
+      // 現在改自己寫在App.css裡
       <div>
         <h3>Logged Companies</h3>
         <table className="table">
-          <thead className="thead-light">
+          <thead>
             <tr>
-              <th>Company22</th>
+              <th>Company</th>
               <th>Location</th>
               <th>Contact1</th>
               <th>Contact2</th>
