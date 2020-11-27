@@ -6,6 +6,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+// 1127 fontawsome icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+
+// 1127未使用此法
+//const element = <FontAwesomeIcon icon={faPencilAlt} />
+
+
 // 1:40:00
 // This component is implemented as a functional react component
 // The key thing that makes this type of component different from a class component 
@@ -24,7 +33,18 @@ const Exercise = props => (
     <td>{props.exercise.status}</td>
     <td>{props.exercise.date.substring(0,10)}</td>
     <td>
-      <Link to={"/edit1/"+props.exercise._id}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
+      <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div className="btn-group mr-3" role="group">
+          <Link to={"/edit1/"+props.exercise._id}>
+            <FontAwesomeIcon icon={faPencilAlt} />
+          </Link>
+        </div>
+        <div className="btn-group" role="group">
+          <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>
+            <FontAwesomeIcon icon={faTrashAlt} />
+          </a>
+        </div>
+      </div>
     </td>
   </tr>
 )
