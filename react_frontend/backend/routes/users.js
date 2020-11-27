@@ -59,10 +59,37 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//1127 edit company
+router.route('/:id').get((req, res) => {
+  // getting the id directly from the url
+  User.findById(req.params.id)
+    .then(company => res.json(company))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // 1126 delete company
 router.route('/:id').delete((req, res) => {
   User.findByIdAndDelete(req.params.id)
     .then(() => res.json('Company deleted.'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//1127 edit company
+router.route('/update/:id').post((req, res) => {
+  User.findById(req.params.id)
+    .then(company => {
+      // update the information from the JSON object we receive
+      // p.s. the post request cannot send just the field we want to update
+      // need to send all the fields or there will be an error
+      company.username = req.body.username;
+      company.location = req.body.location;
+      company.contact1 = req.body.contact1;
+      company.contact2 = req.body.contact2;
+
+      company.save()
+        .then(() => res.json('Company updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
     .catch(err => res.status(400).json('Error: ' + err));
 });
 

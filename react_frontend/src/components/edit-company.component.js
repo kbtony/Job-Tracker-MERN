@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -22,6 +22,23 @@ export default class CreateUser extends Component {
       contact2: ''
 
     }
+  }
+  
+  componentDidMount() {
+    // this.props.match.params.id <- we are getting the id directly from the URL
+    axios.get('http://localhost:5000/users/'+this.props.match.params.id)
+      .then(response => {
+        this.setState({
+          // we'll set the info from the company we are editing 
+          username: response.data.username,
+          location: response.data.location,
+          contact1: response.data.contact1,
+          contact2: response.data.contact2,
+        })   
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
   }
 
   onChangeUsername(e) {
@@ -62,22 +79,10 @@ export default class CreateUser extends Component {
 
     console.log(user);
 
-    // send the HTTP post request to this backend endpoint(http://localhost:5000/users/add)
-    // This endpoint is expecting a JSON object in the request body so we passed in 
-    // the newUser object as a second argument.
-    axios.post('http://localhost:5000/users/add', user)
-      // this is going to be a promise, so after it's posted, we're gonna do something
+    axios.post('http://localhost:5000/users/update/' + this.props.match.params.id, user)
       .then(res => console.log(res.data));
 
-    // keep the user on this page(create-user) after submit 
-    // so they can create multiple users at a time
-    this.setState({
-      username: '',
-      //1126
-      location: '',
-      contact1: '',
-      contact2: ''
-    })
+    window.location = '/company';
   }
 
   render() {
@@ -85,7 +90,7 @@ export default class CreateUser extends Component {
       // what we gonna render here is a very simple web form that has one field
       // 可在input裡加上 placeholder="e.g. Google"
       <div>
-        <h3>Create New Company</h3>
+        <h3>Edit Company</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
             <label>Company </label>
@@ -124,7 +129,16 @@ export default class CreateUser extends Component {
                 />
           </div>
           <div className="form-group">
-            <input type="submit" value="Create Company" className="btn btn-outline-primary btn-sm" />
+            <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div className="input-group mr-2">
+                <input type="submit" value="Edit Company" className="btn btn-primary" /> 
+              </div>
+              <div className="btn-group" role="group">
+                <Link to="/company">
+                  <input type="button" value="Cancel" className="btn btn-danger" />
+                </Link>
+              </div>
+            </div>
           </div>
         </form>
       </div>

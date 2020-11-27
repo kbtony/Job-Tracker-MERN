@@ -13,7 +13,7 @@ const Company = props => (
     <td>{props.company.contact1}</td>
     <td>{props.company.contact2}</td>
     <td>
-      <Link to={"/edit/"+props.company._id}>edit</Link> | <a href="#" onClick={() => { props.deleteCompany(props.company._id) }}>delete</a>
+      <Link to={"/edit2/"+props.company._id}>edit</Link> | <a href="#" onClick={() => { props.deleteCompany(props.company._id) }}>delete</a>
     </td>
   </tr>
 )

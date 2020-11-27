@@ -6,6 +6,9 @@ import DatePicker from 'react-datepicker';
 // the styling for DatePicker
 import "react-datepicker/dist/react-datepicker.css";
 
+//1126 cancel button
+import { Link } from 'react-router-dom';
+
 export default class CreateExercise extends Component {
   /*
   In JavaScript classes, you need to always call super when defining 
@@ -245,7 +248,16 @@ export default class CreateExercise extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Create Job Log" className="btn btn-primary" />
+          <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div className="input-group mr-2">
+              <input type="submit" value="Create Job Log" className="btn btn-primary" /> 
+            </div>
+            <div className="btn-group" role="group">
+              <Link to="/">
+                <input type="button" value="Cancel" className="btn btn-danger" />
+              </Link>
+            </div>
+          </div>
         </div>
       </form>
     </div>
