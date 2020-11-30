@@ -95,3 +95,6 @@ td {
   background-color:#e7e3e3;
   transition: all 0.2s ease;
 }
+.rTable {
+  overflow-x: auto;
+}

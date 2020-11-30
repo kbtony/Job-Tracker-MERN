@@ -20,6 +20,7 @@ const Exercise = props => (
     <td>{props.exercise.status}</td>
     <td>{props.exercise.date.substring(0,10)}</td>
     <td>
+      
       <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div className="btn-group mr-3" id="tableButton" role="group" >
           <Link to={"/edit1/"+props.exercise._id} >
@@ -48,7 +49,8 @@ export default class ExercisesList extends Component {
 
   // get the exercise form the DB
   componentDidMount() {
-    axios.get('http://localhost:5000/exercises/')
+    //axios.get('http://localhost:5000/exercises/')
+    axios.get('http://3.25.86.157:5000/exercises/')
       .then(response => {
         // get all the fields of the exercise (id, discription, duration, ...) 
         this.setState({ exercises: response.data })
@@ -59,7 +61,8 @@ export default class ExercisesList extends Component {
   }
 
   deleteExercise(id) {
-    axios.delete('http://localhost:5000/exercises/'+id)
+    //axios.delete('http://localhost:5000/exercises/'+id)
+    axios.delete('http://3.25.86.157:5000/exercises/'+id)
       .then(response => { console.log(response.data)});
 
     // after the delete operation, automatically update the page with that new state
@@ -78,7 +81,9 @@ export default class ExercisesList extends Component {
   render() {
     return (
       // the body will call the exerciseList() method
-      <div>
+      //<div style={"overflow-x:auto;"}>
+      //<div style={{overflow-x: "auto"}}>
+      <div className="rTable">
         <h3>Logged Jobs</h3>
         <table className="table">
           <thead>

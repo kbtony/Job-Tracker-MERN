@@ -39,7 +39,8 @@ export default class CompaniesList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/users/')
+    //axios.get('http://localhost:5000/users/')
+    axios.get('http://3.25.86.157:5000/users/')
       .then(response => {
         this.setState({ companies: response.data })
       })
@@ -49,7 +50,8 @@ export default class CompaniesList extends Component {
   }
 
   deleteCompany(id) {
-    axios.delete('http://localhost:5000/users/'+id)
+    //axios.delete('http://localhost:5000/users/'+id)
+    axios.delete('http://3.25.86.157:5000/users/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({
@@ -66,7 +68,7 @@ export default class CompaniesList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="rTable">
         <h3>Logged Companies</h3>
         <table className="table">
           <thead>
