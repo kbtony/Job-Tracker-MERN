@@ -34,6 +34,11 @@ import CreateUser from "./components/create-user.component";
 import EditCompany from "./components/edit-company.component";
 import CompaniesList from './components/companies-list.component';
 
+// 1127 animation
+//const t1 = gsap.timeline({defaults: {ease: 'power1.out'}});
+// 1127 animation
+
+
 
 function App() {
   return (
