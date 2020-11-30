@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -8,28 +9,22 @@ export default class CreateUser extends Component {
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    //1126
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeContact1 = this.onChangeContact1.bind(this);
     this.onChangeContact2 = this.onChangeContact2.bind(this);
 
-
     this.state = {
       username: '',
-      //1126
       location: '',
       contact1: '',
       contact2: ''
-
     }
   }
   
   componentDidMount() {
-    // this.props.match.params.id <- we are getting the id directly from the URL
     axios.get('http://localhost:5000/users/'+this.props.match.params.id)
       .then(response => {
         this.setState({
-          // we'll set the info from the company we are editing 
           username: response.data.username,
           location: response.data.location,
           contact1: response.data.contact1,
@@ -47,7 +42,6 @@ export default class CreateUser extends Component {
     })
   }
 
-  //1126
   onChangeLocation(e) {
     this.setState({
       location: e.target.value
@@ -71,24 +65,22 @@ export default class CreateUser extends Component {
 
     const user = {
       username: this.state.username,
-      //1126
       location: this.state.location,
       contact1: this.state.contact1,
       contact2: this.state.contact2
     }
 
-    console.log(user);
+    //console.log(user);
 
     axios.post('http://localhost:5000/users/update/' + this.props.match.params.id, user)
       .then(res => console.log(res.data));
 
+    // redirection to '/company' after editing
     window.location = '/company';
   }
 
   render() {
     return (
-      // what we gonna render here is a very simple web form that has one field
-      // 可在input裡加上 placeholder="e.g. Google"
       <div>
         <h3>Edit Company</h3>
         <form onSubmit={this.onSubmit}>

@@ -1,16 +1,12 @@
-// 1126 show all companyies
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
-// 1127 fontawsome icon
+// fontawsome icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
-
-// 因為下面companyList()中return <Company company=...., 所以這裡是props.company......
 const Company = props => (
   <tr>
     <td>{props.company.username}</td>
@@ -34,24 +30,17 @@ const Company = props => (
   </tr>
 )
 
-
-// This is implemented as a class component
 export default class CompaniesList extends Component {
   constructor(props) {
     super(props);
 
     this.deleteCompany = this.deleteCompany.bind(this)
-
-    // intialize the state to an empty company array
     this.state = {companies: []};
   }
 
-  // get the exercise form the DB
   componentDidMount() {
     axios.get('http://localhost:5000/users/')
       .then(response => {
-        // get all the fields of the exercise (id, discription, duration, ...) 
-        // and put it in the 'companies' array
         this.setState({ companies: response.data })
       })
       .catch((error) => {
@@ -63,21 +52,12 @@ export default class CompaniesList extends Component {
     axios.delete('http://localhost:5000/users/'+id)
       .then(response => { console.log(response.data)});
 
-    // after the user delete the exercise, we want to also delete the element
-    // from what has displayed to the user
-    // whenever you do setState, react will automatically update the page with that new state
     this.setState({
-      // for every element in the 'companies' array (el), we'll gonna return if the el._id !== id
-      // p.s. in MongoDB, the _id is automatically created when we create the object
       companies: this.state.companies.filter(el => el._id !== id)
     })
   }
 
-  // This method going to return the rows of the table,
-  // iterating through the list of exercise items by using the map function. 
-  // Each exercise item (currentcompany) is output with the Exercise component.
-  // The Exercise component is basically a row of table, and we're going to pass in 
-  // three props:exercise, deleteCompany, key (think of exercise as variable anf {}內的是value)
+  // return the rows of the table,
   companyList() {
     return this.state.companies.map(currentcompany => {
       return <Company company={currentcompany} deleteCompany={this.deleteCompany} key={currentcompany._id}/>;
@@ -86,9 +66,6 @@ export default class CompaniesList extends Component {
 
   render() {
     return (
-      // the body will call the companyList() method
-      // 1127 原本是用bootstrap <thead className="thead-light">
-      // 現在改自己寫在App.css裡
       <div>
         <h3>Logged Companies</h3>
         <table className="table">

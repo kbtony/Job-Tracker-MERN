@@ -1,15 +1,11 @@
-// very similar to the create-exercise.componet
-// 之後refactoring 可以把create-exercise componet & edit-exercise component 合併
-// just update thing with the props based on what's going on 
+
+// update thing with the props based on what's going on 
 
 import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-
-//1126 cancel button
 import { Link } from 'react-router-dom';
-
 
 export default class EditExercise extends Component {
   constructor(props) {
@@ -35,16 +31,13 @@ export default class EditExercise extends Component {
   }
 
   componentDidMount() {
-    // this.props.match.params.id <- we are getting the id directly from the URL
     axios.get('http://localhost:5000/exercises/'+this.props.match.params.id)
       .then(response => {
         this.setState({
-          // we'll set the company from the exercise we are editing 
           company: response.data.company,
           jobTitle: response.data.jobTitle,
           description: response.data.description,
           duration: response.data.duration,
-          // current date
           status: response.data.status,
           date: new Date(response.data.date)
         })   
@@ -64,7 +57,6 @@ export default class EditExercise extends Component {
       .catch((error) => {
         console.log(error);
       })
-
   }
 
   onChangeCompany(e) {
@@ -73,7 +65,6 @@ export default class EditExercise extends Component {
     })
   }
 
-  //1126
   onChangeJobTitle(e) {
     this.setState({
       jobTitle: e.target.value
@@ -98,7 +89,6 @@ export default class EditExercise extends Component {
     })
   }
 
-  //1126
   onChangeStatus(e) {
     this.setState({
       status: e.target.value
@@ -127,7 +117,6 @@ export default class EditExercise extends Component {
 
   render() {
     return (
-    // pretty standard HTML form code
     <div>
       <h3>Edit Job Log</h3>
       <form onSubmit={this.onSubmit}>
@@ -140,13 +129,6 @@ export default class EditExercise extends Component {
               value={this.state.company}
               onChange={this.onChangeCompany}>
               {
-                // we can put javascript in the curly bracses
-                // this.state.companies is an array of all the companies which come from our MongoDB
-                // .map allows us to return something for each element in an array
-                // for each 'user', it will return an 'option', which is an option of the select box
-                // The DatePicker component is going to pop out a calendar (by installing a package)
-                // p.s. map(), ()內的could be an arrow function if we want to refactor, now it's 
-                // just a regular function
                 this.state.companies.map(function(user) {
                   return <option 
                     key={user}
