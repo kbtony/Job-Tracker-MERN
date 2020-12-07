@@ -18,10 +18,10 @@ export default class Navbar extends Component {
             <Link to="/company" className="nav-link">Company</Link>
             </li>
             <li className="navbar-item">
-            <Link to="/create" className="nav-link">Create Job Log</Link>
+            <Link to="/create-job" className="nav-link">Create Job Log</Link>
             </li>
             <li className="navbar-item">
-            <Link to="/user" className="nav-link">Create Company</Link>
+            <Link to="/create-company" className="nav-link">Create Company</Link>
             </li>
           </ul>
         </div>
