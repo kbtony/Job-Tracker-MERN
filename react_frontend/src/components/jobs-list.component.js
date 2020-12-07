@@ -84,7 +84,7 @@ export default class JobsList extends Component {
       //<div style={"overflow-x:auto;"}>
       //<div style={{overflow-x: "auto"}}>
       <div className="rTable">
-        <h3>Appliedsss Jobs</h3>
+        <h3>Applied Jobs</h3>
         <table className="table">
           <thead>
             <tr>
