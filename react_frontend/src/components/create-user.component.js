@@ -57,8 +57,8 @@ export default class CreateUser extends Component {
 
     //console.log(user);
 
-    //axios.post('http://localhost:5000/users/add', user)
-    axios.post('http://3.25.86.157:5000/users/add', user)
+    axios.post('http://localhost:5000/users/add', user)
+    //axios.post('http://3.25.86.157:5000/users/add', user)
       .then(res => console.log(res.data));
 
     this.setState({
@@ -74,7 +74,7 @@ export default class CreateUser extends Component {
       <div>
         <h3>Create New Company</h3>
         <form onSubmit={this.onSubmit}>
-          <div class="form-row">
+          <div className="form-row">
             <div className="form-group col-md-6"> 
               <label>Company </label>
               <label style={{color:'red'}}>＊ </label>

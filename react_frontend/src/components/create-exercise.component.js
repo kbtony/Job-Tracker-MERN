@@ -34,8 +34,8 @@ export default class CreateExercise extends Component {
   }
 
   componentDidMount() {
-    //axios.get('http://localhost:5000/users/')
-    axios.get('http://3.25.86.157:5000/users/')
+    axios.get('http://localhost:5000/users/')
+    //axios.get('http://3.25.86.157:5000/users/')
       .then(response => {
         // check if there is at least one user in the DB
         if (response.data.length > 0) {
@@ -102,8 +102,8 @@ export default class CreateExercise extends Component {
 
     //console.log(exercise);
 
-    //axios.post('http://localhost:5000/exercises/add', exercise)
-    axios.post('http://3.25.86.157:5000/exercises/add', exercise)
+    axios.post('http://localhost:5000/exercises/add', exercise)
+    //axios.post('http://3.25.86.157:5000/exercises/add', exercise)
       // log the result to the console
       .then(res => console.log(res.data));
 

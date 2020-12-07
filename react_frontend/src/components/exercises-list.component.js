@@ -49,8 +49,8 @@ export default class ExercisesList extends Component {
 
   // get the exercise form the DB
   componentDidMount() {
-    //axios.get('http://localhost:5000/exercises/')
-    axios.get('http://3.25.86.157:5000/exercises/')
+    axios.get('http://localhost:5000/exercises/')
+    //axios.get('http://3.25.86.157:5000/exercises/')
       .then(response => {
         // get all the fields of the exercise (id, discription, duration, ...) 
         this.setState({ exercises: response.data })
@@ -61,8 +61,8 @@ export default class ExercisesList extends Component {
   }
 
   deleteExercise(id) {
-    //axios.delete('http://localhost:5000/exercises/'+id)
-    axios.delete('http://3.25.86.157:5000/exercises/'+id)
+    axios.delete('http://localhost:5000/exercises/'+id)
+    //axios.delete('http://3.25.86.157:5000/exercises/'+id)
       .then(response => { console.log(response.data)});
 
     // after the delete operation, automatically update the page with that new state
