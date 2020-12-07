@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const companySchema = new Schema({
-  username: {
+  name: {
     type: String,
     required: true,
     unique: true,
@@ -32,9 +32,9 @@ const companySchema = new Schema({
   timestamps: true,
 });
 
-const User = mongoose.model('Company', companySchema);
-module.exports = User;
+const Company = mongoose.model('Company', companySchema);
+module.exports = Company;
 
-// 寫法二
-// module.exports = mongoose.model('User', userSchema);
+// Another way to code:
+//module.exports = mongoose.model('Company', companySchema);
 
