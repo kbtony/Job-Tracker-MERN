@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from 'react-router-dom';
 
-export default class EditExercise extends Component {
+export default class EditJob extends Component {
   constructor(props) {
     super(props);
 
@@ -31,8 +31,8 @@ export default class EditExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/exercises/'+this.props.match.params.id)
-    //axios.get('http://3.25.86.157:5000/exercises/'+this.props.match.params.id)
+    axios.get('http://localhost:5000/jobs/'+this.props.match.params.id)
+    //axios.get('http://3.25.86.157:5000/jobs/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           company: response.data.company,
@@ -47,12 +47,12 @@ export default class EditExercise extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:5000/users/')
-    //axios.get('http://3.25.86.157:5000/users/')
+    axios.get('http://localhost:5000/companies/')
+    //axios.get('http://3.25.86.157:5000/companies/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
-            companies: response.data.map(user => user.username),
+            companies: response.data.map(user => user.name),
           })
         }
       })
@@ -100,7 +100,7 @@ export default class EditExercise extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const exercise = {
+    const job = {
       company: this.state.company,
       jobTitle: this.state.jobTitle,
       description: this.state.description,
@@ -109,11 +109,10 @@ export default class EditExercise extends Component {
       date: this.state.date
     }
 
-    console.log("edit log:");
-    console.log(exercise);
+    //console.log(job);
 
-    axios.post('http://localhost:5000/exercises/update/' + this.props.match.params.id, exercise)
-    //axios.post('http://3.25.86.157:5000/exercises/update/' + this.props.match.params.id, exercise)
+    axios.post('http://localhost:5000/jobs/update/' + this.props.match.params.id, job)
+    //axios.post('http://3.25.86.157:5000/jobs/update/' + this.props.match.params.id, job)
       .then(res => console.log(res.data));
 
     window.location = '/';

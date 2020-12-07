@@ -9,14 +9,14 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 const Company = props => (
   <tr>
-    <td>{props.company.username}</td>
+    <td>{props.company.name}</td>
     <td>{props.company.location}</td>
     <td>{props.company.contact1}</td>
     <td>{props.company.contact2}</td>
     <td>
       <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div className="btn-group mr-3" id="tableButton" role="group">
-          <Link to={"/edit2/"+props.company._id}>
+          <Link to={"/edit-company/"+props.company._id}>
             <FontAwesomeIcon icon={faPencilAlt} />
           </Link>
         </div>
@@ -39,9 +39,10 @@ export default class CompaniesList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/users/')
-    //axios.get('http://3.25.86.157:5000/users/')
+    axios.get('http://localhost:5000/companies/')
+    //axios.get('http://3.25.86.157:5000/companies/')
       .then(response => {
+        console.log(response.data);
         this.setState({ companies: response.data })
       })
       .catch((error) => {
@@ -50,8 +51,8 @@ export default class CompaniesList extends Component {
   }
 
   deleteCompany(id) {
-    axios.delete('http://localhost:5000/users/'+id)
-    //axios.delete('http://3.25.86.157:5000/users/'+id)
+    axios.delete('http://localhost:5000/companies/'+id)
+    //axios.delete('http://3.25.86.157:5000/companies/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({

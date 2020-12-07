@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from 'react-router-dom';
 
-export default class CreateExercise extends Component {
+export default class CreateJob extends Component {
   
   constructor(props) {
     super(props);
@@ -34,15 +34,15 @@ export default class CreateExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/users/')
-    //axios.get('http://3.25.86.157:5000/users/')
+    axios.get('http://localhost:5000/companies/')
+    //axios.get('http://3.25.86.157:5000/companies/')
       .then(response => {
-        // check if there is at least one user in the DB
+        // check if there is at least one company in the DB
         if (response.data.length > 0) {
           this.setState({
-            companies: response.data.map(user => user.username),
+            companies: response.data.map(company => company.name),
             // company is automatically set to the first company in the DB
-            company: response.data[0].username
+            company: response.data[0].name
           })
         }
       })
@@ -91,7 +91,7 @@ export default class CreateExercise extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const exercise = {
+    const job = {
       company: this.state.company,
       jobTitle: this.state.jobTitle,
       description: this.state.description,
@@ -100,10 +100,10 @@ export default class CreateExercise extends Component {
       date: this.state.date 
     }
 
-    //console.log(exercise);
+    console.log(job);
 
-    axios.post('http://localhost:5000/exercises/add', exercise)
-    //axios.post('http://3.25.86.157:5000/exercises/add', exercise)
+    axios.post('http://localhost:5000/jobs/add', job)
+    //axios.post('http://3.25.86.157:5000/jobs/add', job)
       // log the result to the console
       .then(res => console.log(res.data));
 
@@ -125,10 +125,10 @@ export default class CreateExercise extends Component {
               value={this.state.company}
               onChange={this.onChangeCompany}>
               {
-                this.state.companies.map(function(user) {
+                this.state.companies.map(function(company) {
                   return <option 
-                    key={user}
-                    value={user}>{user}
+                    key={company}
+                    value={company}>{company}
                     </option>;
                 })
               }

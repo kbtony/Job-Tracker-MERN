@@ -11,24 +11,23 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 
 // a functional react component 
-const Exercise = props => (
+const Job = props => (
   <tr>
-    <td style={{color: "white"}}>{props.exercise.company}</td>
-    <td>{props.exercise.jobTitle}</td>
-    <td>{props.exercise.description}</td>
-    <td>{props.exercise.duration}</td>
-    <td>{props.exercise.status}</td>
-    <td>{props.exercise.date.substring(0,10)}</td>
+    <td style={{color: "white"}}>{props.job.company}</td>
+    <td>{props.job.jobTitle}</td>
+    <td>{props.job.description}</td>
+    <td>{props.job.duration}</td>
+    <td>{props.job.status}</td>
+    <td>{props.job.date.substring(0,10)}</td>
     <td>
-      
       <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div className="btn-group mr-3" id="tableButton" role="group" >
-          <Link to={"/edit1/"+props.exercise._id} >
+          <Link to={"/edit-job/"+props.job._id} >
             <FontAwesomeIcon icon={faPencilAlt} />
           </Link>
         </div>
         <div className="btn-group" id="tableButton" role="group">
-          <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }} style={{color:'red'}}>
+          <a href="#" onClick={() => { props.deleteJob(props.job._id) }} style={{color:'red'}}>
             <FontAwesomeIcon icon={faTrashAlt} />
           </a>
         </div>
@@ -38,53 +37,54 @@ const Exercise = props => (
 )
 
 // a class component
-export default class ExercisesList extends Component {
+export default class JobsList extends Component {
   constructor(props) {
     super(props);
 
-    this.deleteExercise = this.deleteExercise.bind(this)
-    // intialize the state to an empry exercise array
-    this.state = {exercises: []};
+    this.deleteJob = this.deleteJob.bind(this)
+    // intialize the state to an empry job array
+    this.state = {jobs: []};
   }
 
-  // get the exercise form the DB
+  // get the job form the DB
   componentDidMount() {
-    axios.get('http://localhost:5000/exercises/')
-    //axios.get('http://3.25.86.157:5000/exercises/')
+    axios.get('http://localhost:5000/jobs/')
+    //axios.get('http://3.25.86.157:5000/jobs/')
       .then(response => {
-        // get all the fields of the exercise (id, discription, duration, ...) 
-        this.setState({ exercises: response.data })
+        // get all the fields of the job (id, discription, duration, ...) 
+        console.log(response.data);
+        this.setState({ jobs: response.data });        
       })
       .catch((error) => {
         console.log(error);
       })
   }
 
-  deleteExercise(id) {
-    axios.delete('http://localhost:5000/exercises/'+id)
-    //axios.delete('http://3.25.86.157:5000/exercises/'+id)
+  deleteJob(id) {
+    axios.delete('http://localhost:5000/jobs/'+id)
+    //axios.delete('http://3.25.86.157:5000/jobs/'+id)
       .then(response => { console.log(response.data)});
 
     // after the delete operation, automatically update the page with that new state
     this.setState({
-      exercises: this.state.exercises.filter(el => el._id !== id)
+      jobs: this.state.jobs.filter(el => el._id !== id)
     })
   }
 
   // return the rows of the table
-  exerciseList() {
-    return this.state.exercises.map(currentexercise => {
-      return <Exercise exercise={currentexercise} deleteExercise={this.deleteExercise} key={currentexercise._id}/>;
+  jobList() {
+    return this.state.jobs.map(currentjob => {
+      return <Job job={currentjob} deleteJob={this.deleteJob} key={currentjob._id}/>;
     })
   }
 
   render() {
     return (
-      // the body will call the exerciseList() method
+      // the body will call the jobList() method
       //<div style={"overflow-x:auto;"}>
       //<div style={{overflow-x: "auto"}}>
       <div className="rTable">
-        <h3>Applied Jobs</h3>
+        <h3>Appliedsss Jobs</h3>
         <table className="table">
           <thead>
             <tr>
@@ -98,7 +98,7 @@ export default class ExercisesList extends Component {
             </tr>
           </thead>
           <tbody>
-            { this.exerciseList() }
+            { this.jobList() }
           </tbody>
         </table>
       </div>

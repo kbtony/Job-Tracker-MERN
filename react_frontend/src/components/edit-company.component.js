@@ -7,14 +7,14 @@ export default class CreateUser extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeContact1 = this.onChangeContact1.bind(this);
     this.onChangeContact2 = this.onChangeContact2.bind(this);
 
     this.state = {
-      username: '',
+      name: '',
       location: '',
       contact1: '',
       contact2: ''
@@ -22,11 +22,11 @@ export default class CreateUser extends Component {
   }
   
   componentDidMount() {
-    axios.get('http://localhost:5000/users/'+this.props.match.params.id)
-    //axios.get('http://3.25.86.157:5000/users/'+this.props.match.params.id)
+    axios.get('http://localhost:5000/companies/'+this.props.match.params.id)
+    //axios.get('http://3.25.86.157:5000/companies/'+this.props.match.params.id)
       .then(response => {
         this.setState({
-          username: response.data.username,
+          name: response.data.name,
           location: response.data.location,
           contact1: response.data.contact1,
           contact2: response.data.contact2,
@@ -37,9 +37,9 @@ export default class CreateUser extends Component {
       })
   }
 
-  onChangeUsername(e) {
+  onChangeName(e) {
     this.setState({
-      username: e.target.value
+      name: e.target.value
     })
   }
 
@@ -64,21 +64,21 @@ export default class CreateUser extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const user = {
-      username: this.state.username,
+    const company = {
+      name: this.state.name,
       location: this.state.location,
       contact1: this.state.contact1,
       contact2: this.state.contact2
     }
 
-    console.log(user);
+    console.log(company);
 
-    axios.post('http://localhost:5000/users/update/' + this.props.match.params.id, user)
-    //axios.post('http://3.25.86.157:5000/users/update/' + this.props.match.params.id, user)
+    axios.post('http://localhost:5000/companies/update/' + this.props.match.params.id, company)
+    //axios.post('http://3.25.86.157:5000/companies/update/' + this.props.match.params.id, company)
       .then(res => console.log(res.data));
 
-    // redirection to '/company' after editing
-    window.location = '/company';
+    // redirection to '/company-list' after editing
+    window.location = '/company-list';
   }
 
   render() {
@@ -92,8 +92,8 @@ export default class CreateUser extends Component {
             <input  type="text"
                 required
                 className="form-control"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
+                value={this.state.name}
+                onChange={this.onChangeName}
                 />
           </div>
           <div className="form-group">
@@ -128,7 +128,7 @@ export default class CreateUser extends Component {
                 <input type="submit" value="Edit Company" className="btn btn-primary" /> 
               </div>
               <div className="btn-group" role="group">
-                <Link to="/company">
+                <Link to="/company-list">
                   <input type="button" value="Cancel" className="btn btn-danger" />
                 </Link>
               </div>

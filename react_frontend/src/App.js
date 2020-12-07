@@ -8,12 +8,12 @@ import './App.css';
 
 // components
 import Navbar from "./components/navbar.component"
-import ExercisesList from "./components/exercises-list.component";
-import EditExercise from "./components/edit-exercise.component";
-import CreateExercise from "./components/create-exercise.component";
-import CreateUser from "./components/create-user.component";
-import EditCompany from "./components/edit-company.component";
+import JobList from "./components/jobs-list.component";
+import CreateJob from "./components/create-job.component";
+import EditJob from "./components/edit-job.component";
 import CompaniesList from './components/companies-list.component';
+import CreateCompany from "./components/create-company.component";
+import EditCompany from "./components/edit-company.component";
 
 
 function App() {
@@ -22,12 +22,12 @@ function App() {
       <div className="container">
         <Navbar />
         <br/>
-        <Route path="/" exact component={ExercisesList} />
-        <Route path="/company" component={CompaniesList} />
-        <Route path="/edit1/:id" component={EditExercise} />
-        <Route path="/edit2/:id" component={EditCompany} />
-        <Route path="/create" component={CreateExercise} />
-        <Route path="/user" component={CreateUser} />
+        <Route path="/" exact component={JobList} />
+        <Route path="/company-list" component={CompaniesList} />
+        <Route path="/edit-job/:id" component={EditJob} />
+        <Route path="/edit-company/:id" component={EditCompany} />
+        <Route path="/create-job" component={CreateJob} />
+        <Route path="/create-company" component={CreateCompany} />
       </div>
     </Router>
   );
