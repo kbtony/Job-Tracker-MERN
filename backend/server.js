@@ -23,10 +23,10 @@ connection.once('open', () => {
 });
 
 // load the routers and add them as middleware.
-const exercisesRouter = require('./routes/exercises');
-const usersRouter = require('./routes/users');
-app.use('/exercises', exercisesRouter);
-app.use('/users', usersRouter);
+const jobsRouter = require('./routes/jobs');
+const companiesRouter = require('./routes/companies');
+app.use('/jobs', jobsRouter);
+app.use('/companies', companiesRouter);
 
 // server starts to listen on a certain port
 app.listen(port, () => {

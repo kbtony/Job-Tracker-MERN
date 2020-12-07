@@ -1,33 +1,35 @@
 
 const router = require('express').Router();
-let Company = require('../models/user.model');
+let Company = require('../models/company.model');
 
 router.route('/').get((req, res) => {
 
   Company.find()
 
-    //.then(users => res.json(users))
+    //.then(companies => res.json(companies))
 
-    .then(function(users){
-      //console.log(" find users !");
-      //console.log(users);
-      //console.log(" find types of users:" + typeof(users));
-      return res.json(users)
+    .then(function(companies){
+      //console.log(" find companies !");
+      //console.log(companies);
+      //console.log(" find types of companies:" + typeof(companies));
+      return res.json(companies)
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
-  const username = req.body.username;
+  const name = req.body.name;
   const location = req.body.location;
   const contact1 = req.body.contact1;
   const contact2 = req.body.contact2;
 
   // create a new instance
-  const newUser = new Company({username, location, contact1, contact2});
+  const newCompany = new Company({name, location, contact1, contact2});
+
+  //console.log(newCompany);
 
   // save it to DB
-  newUser.save()
+  newCompany.save()
     .then(() => res.json('Company added!'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -49,7 +51,7 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Company.findById(req.params.id)
     .then(company => {
-      company.username = req.body.username;
+      company.name = req.body.name;
       company.location = req.body.location;
       company.contact1 = req.body.contact1;
       company.contact2 = req.body.contact2;

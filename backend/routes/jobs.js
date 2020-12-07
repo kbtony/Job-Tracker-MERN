@@ -2,11 +2,11 @@
 // this file served as the router file
 
 const router = require('express').Router();
-let Job = require('../models/exercise.model');
+let Job = require('../models/job.model');
 
 router.route('/').get((req, res) => {
   Job.find()
-    .then(exercises => res.json(exercises))
+    .then(jobs => res.json(jobs))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -19,7 +19,7 @@ router.route('/add').post((req, res) => {
   const date = Date.parse(req.body.date);
   const status = req.body.status;
 
-  const newExercise = new Job({
+  const newJob = new Job({
     company,
     jobTitle,
     description,
@@ -28,7 +28,7 @@ router.route('/add').post((req, res) => {
     status,
   });
 
-  newExercise.save()
+  newJob.save()
   .then(() => res.json('Job added!'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -36,7 +36,7 @@ router.route('/add').post((req, res) => {
 // add some more API endpoints
 router.route('/:id').get((req, res) => {
   Job.findById(req.params.id)
-    .then(exercise => res.json(exercise))
+    .then(job => res.json(job))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -48,15 +48,15 @@ router.route('/:id').delete((req, res) => {
 
 router.route('/update/:id').post((req, res) => {
   Job.findById(req.params.id)
-    .then(exercise => {
-      exercise.company = req.body.company;
-      exercise.jobTitle = req.body.jobTitle;
-      exercise.description = req.body.description;
-      exercise.duration = Number(req.body.duration);
-      exercise.date = Date.parse(req.body.date);
-      exercise.status = req.body.status;
+    .then(job => {
+      job.company = req.body.company;
+      job.jobTitle = req.body.jobTitle;
+      job.description = req.body.description;
+      job.duration = Number(req.body.duration);
+      job.date = Date.parse(req.body.date);
+      job.status = req.body.status;
 
-      exercise.save()
+      job.save()
         .then(() => res.json('Job updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
