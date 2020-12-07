@@ -34,8 +34,8 @@ export default class CreateJob extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/companies/')
-    //axios.get('http://3.25.86.157:5000/companies/')
+    //axios.get('http://localhost:5000/companies/')
+    axios.get('http://3.25.86.157:5000/companies/')
       .then(response => {
         // check if there is at least one company in the DB
         if (response.data.length > 0) {
@@ -102,8 +102,8 @@ export default class CreateJob extends Component {
 
     console.log(job);
 
-    axios.post('http://localhost:5000/jobs/add', job)
-    //axios.post('http://3.25.86.157:5000/jobs/add', job)
+    //axios.post('http://localhost:5000/jobs/add', job)
+    axios.post('http://3.25.86.157:5000/jobs/add', job)
       // log the result to the console
       .then(res => console.log(res.data));
 

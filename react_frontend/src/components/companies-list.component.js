@@ -39,8 +39,8 @@ export default class CompaniesList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/companies/')
-    //axios.get('http://3.25.86.157:5000/companies/')
+    //axios.get('http://localhost:5000/companies/')
+    axios.get('http://3.25.86.157:5000/companies/')
       .then(response => {
         console.log(response.data);
         this.setState({ companies: response.data })
@@ -51,8 +51,8 @@ export default class CompaniesList extends Component {
   }
 
   deleteCompany(id) {
-    axios.delete('http://localhost:5000/companies/'+id)
-    //axios.delete('http://3.25.86.157:5000/companies/'+id)
+    //axios.delete('http://localhost:5000/companies/'+id)
+    axios.delete('http://3.25.86.157:5000/companies/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({

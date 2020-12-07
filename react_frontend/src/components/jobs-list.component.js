@@ -48,8 +48,8 @@ export default class JobsList extends Component {
 
   // get the job form the DB
   componentDidMount() {
-    axios.get('http://localhost:5000/jobs/')
-    //axios.get('http://3.25.86.157:5000/jobs/')
+    //axios.get('http://localhost:5000/jobs/')
+    axios.get('http://3.25.86.157:5000/jobs/')
       .then(response => {
         // get all the fields of the job (id, discription, duration, ...) 
         console.log(response.data);
@@ -61,8 +61,8 @@ export default class JobsList extends Component {
   }
 
   deleteJob(id) {
-    axios.delete('http://localhost:5000/jobs/'+id)
-    //axios.delete('http://3.25.86.157:5000/jobs/'+id)
+    //axios.delete('http://localhost:5000/jobs/'+id)
+    axios.delete('http://3.25.86.157:5000/jobs/'+id)
       .then(response => { console.log(response.data)});
 
     // after the delete operation, automatically update the page with that new state

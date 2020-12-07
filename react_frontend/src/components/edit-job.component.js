@@ -31,8 +31,8 @@ export default class EditJob extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/jobs/'+this.props.match.params.id)
-    //axios.get('http://3.25.86.157:5000/jobs/'+this.props.match.params.id)
+    //axios.get('http://localhost:5000/jobs/'+this.props.match.params.id)
+    axios.get('http://3.25.86.157:5000/jobs/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           company: response.data.company,
@@ -47,8 +47,8 @@ export default class EditJob extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:5000/companies/')
-    //axios.get('http://3.25.86.157:5000/companies/')
+    //axios.get('http://localhost:5000/companies/')
+    axios.get('http://3.25.86.157:5000/companies/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -111,8 +111,8 @@ export default class EditJob extends Component {
 
     //console.log(job);
 
-    axios.post('http://localhost:5000/jobs/update/' + this.props.match.params.id, job)
-    //axios.post('http://3.25.86.157:5000/jobs/update/' + this.props.match.params.id, job)
+    //axios.post('http://localhost:5000/jobs/update/' + this.props.match.params.id, job)
+    axios.post('http://3.25.86.157:5000/jobs/update/' + this.props.match.params.id, job)
       .then(res => console.log(res.data));
 
     window.location = '/';

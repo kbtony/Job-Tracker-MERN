@@ -56,8 +56,8 @@ export default class CreateCompany extends Component {
 
     console.log(company);
 
-    axios.post('http://localhost:5000/companies/add', company)
-    //axios.post('http://3.25.86.157:5000/companies/add', company)
+    //axios.post('http://localhost:5000/companies/add', company)
+    axios.post('http://3.25.86.157:5000/companies/add', company)
       .then(res => console.log(res.data));
 
     this.setState({

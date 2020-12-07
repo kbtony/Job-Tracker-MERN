@@ -22,8 +22,8 @@ export default class CreateUser extends Component {
   }
   
   componentDidMount() {
-    axios.get('http://localhost:5000/companies/'+this.props.match.params.id)
-    //axios.get('http://3.25.86.157:5000/companies/'+this.props.match.params.id)
+    //axios.get('http://localhost:5000/companies/'+this.props.match.params.id)
+    axios.get('http://3.25.86.157:5000/companies/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           name: response.data.name,
@@ -73,8 +73,8 @@ export default class CreateUser extends Component {
 
     console.log(company);
 
-    axios.post('http://localhost:5000/companies/update/' + this.props.match.params.id, company)
-    //axios.post('http://3.25.86.157:5000/companies/update/' + this.props.match.params.id, company)
+    //axios.post('http://localhost:5000/companies/update/' + this.props.match.params.id, company)
+    axios.post('http://3.25.86.157:5000/companies/update/' + this.props.match.params.id, company)
       .then(res => console.log(res.data));
 
     // redirection to '/company-list' after editing
